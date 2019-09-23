@@ -1,8 +1,18 @@
 import * as functions from 'firebase-functions'
+import axios from 'axios'
+import * as dotenv from 'dotenv'
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+dotenv.config()
+
+export const test = functions.https.onRequest(async (_, res) => {
+  await axios({
+    method: 'POST',
+    url: 'https://slack.com/api/chat.postMessage',
+    params: {
+      token: process.env.SLACK_TOKEN,
+      channel: 'random',
+      text: 'Hello TypeScript Slack App'
+    }
+  })
+  res.status(200).end()
+})
