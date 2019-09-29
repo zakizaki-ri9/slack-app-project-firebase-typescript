@@ -20,6 +20,7 @@
     "firebase-functions": "^3.1.0"
   },
   "devDependencies": {
+    "@slack/web-api": "^5.2.0",
     "@types/dotenv": "^6.1.1",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",

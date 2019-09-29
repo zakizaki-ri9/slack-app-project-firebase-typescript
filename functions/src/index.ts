@@ -1,20 +1,20 @@
 import * as functions from 'firebase-functions'
-import axios from 'axios'
 import * as dotenv from 'dotenv'
-import * as channelRanking from './functions/channel-ranking'
+import * as conversations from './functions/conversations'
+import { WebClient } from '@slack/web-api'
 
 dotenv.config()
 
-export const test = functions.https.onRequest(async (_, res) => {
-  await axios({
-    method: 'POST',
-    url: 'https://slack.com/api/chat.postMessage',
-    params: {
-      token: process.env.SLACK_TOKEN,
+export const channelNamesPost = functions.https.onRequest(async (_, res) => {
+  const channels = await conversations.list()
+  if (channels) {
+    const client = new WebClient(process.env.SLACK_TOKEN)
+    await client.chat.postMessage({
       channel: 'general',
-      text: 'Hello TypeScript Slack App'
-    }
-  })
+      text: channels.map((v) => {return v.name_normalized}).join('\n')
+    })
+  }
+
+  // 200OKを返す
   res.status(200).end()
-  channelRanking.run()
 })
