@@ -4,13 +4,13 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 interface ConversationsListResult extends WebAPICallResult {
-  channels?: Channel[];
+  channels?: Channel[]
 }
 
 interface Channel {
-  id: string;
-  name: string;
-  name_normalized: string;
+  id: string
+  name: string
+  name_normalized: string
 }
 
 export async function list(): Promise<Channel[]> {

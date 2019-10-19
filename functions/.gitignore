@@ -2,6 +2,7 @@
 **/*.js
 **/*.js.map
 !.eslintrc.js
+!.prettierrc.js
 
 # Typescript v1 declaration files
 typings/

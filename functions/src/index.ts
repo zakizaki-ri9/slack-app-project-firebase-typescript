@@ -11,7 +11,11 @@ export const channelNamesPost = functions.https.onRequest(async (_, res) => {
     const client = new WebClient(process.env.SLACK_TOKEN)
     await client.chat.postMessage({
       channel: 'general',
-      text: channels.map((v) => {return v.name_normalized}).join('\n')
+      text: channels
+        .map(v => {
+          return v.name_normalized
+        })
+        .join('\n')
     })
   }
 

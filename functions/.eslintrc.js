@@ -4,37 +4,49 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: ["eslint:recommended"],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly"
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: "module"
+    sourceType: 'module'
   },
+  plugins: ['prettier'],
   rules: {
     // 共通のルールを設定
-    semi: ["error", "never"],
-    quotes: ["error", "single"],
-    indent: ["error", 2]
+    'prettier/prettier': 'error'
   },
   overrides: [
     // TypeScript系ファイルへのルールを設定
     {
-      files: ["**/*.ts"],
+      files: ['**/*.ts'],
       extends: [
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended"
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended'
       ],
-      parser: "@typescript-eslint/parser",
+      parser: '@typescript-eslint/parser',
       parserOptions: {
-        sourceType: "module",
-        project: "./tsconfig.json"
+        sourceType: 'module',
+        project: './tsconfig.json'
       },
-      plugins: ["@typescript-eslint"],
+      plugins: ['@typescript-eslint'],
       rules: {
-        // TypeScript系のファイルに対しての設定を行う
+        // interface等のメンバーを定義する際、複数行にまたがる場合はデミリタ無しとする (prettierとの競合解消)
+        '@typescript-eslint/member-delimiter-style': [
+          'error',
+          {
+            multiline: {
+              delimiter: 'none',
+              requireLast: false
+            },
+            singleline: {
+              delimiter: 'comma',
+              requireLast: false
+            }
+          }
+        ]
       }
     }
   ]
