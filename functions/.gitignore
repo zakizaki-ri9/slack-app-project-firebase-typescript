@@ -1,8 +1,12 @@
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
+script/target.json
+
 !.eslintrc.js
 !.prettierrc.js
+!script/*.js
+!script/**/*.js
 
 # Typescript v1 declaration files
 typings/

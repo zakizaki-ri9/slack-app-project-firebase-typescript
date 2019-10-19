@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as dotenv from 'dotenv'
-import * as conversations from './functions/conversations'
+import * as conversations from './functions/slack/conversations'
 import { WebClient } from '@slack/web-api'
 
 dotenv.config()
