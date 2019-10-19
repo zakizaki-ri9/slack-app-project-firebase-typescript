@@ -8,7 +8,7 @@
     "shell": "yarn build && firebase functions:shell",
     "start": "yarn shell",
     "logs": "firebase functions:log",
-    "lint-fix": "eslint --fix src/*.{ts,js} src/**/*.{ts,js}"
+    "lint-fix": "eslint --ext .ts,.js --fix src/**"
   },
   "engines": {
     "node": "10"

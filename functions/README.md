@@ -106,12 +106,13 @@ module.exports = {
 
 ### `package.json`
 
-lint用コマンドを追加
+lint用コマンドを追加  
+glob指定だと、該当するファイルが1つもない場合にエラーとなるため、extオプションで指定する  
 
 ```json
 {
   "scripts": {
-    "lint-fix": "eslint --fix src/*.{ts,js} src/**/*.{ts,js}"
+    "lint-fix": "eslint --ext .ts,.js --fix src/**"
   },
 }
 ```
@@ -122,3 +123,5 @@ lint用コマンドを追加
   - eslintやstylelintとの連携方法が記載されている
 - [Prettier - Options](https://prettier.io/docs/en/options.html#semicolons)
   - `.prettierrc.js`に指定するkey-valueを確認できる
+- [Qiita - typescript-eslintの拡張子設定](https://qiita.com/karak/items/12811d235b0d8bc8ad00)
+  - extオプションを参考にした
