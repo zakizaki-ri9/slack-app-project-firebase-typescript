@@ -1,7 +1,8 @@
 ## Compiled JavaScript files
 **/*.js
 **/*.js.map
-script/target.json
+script/*.json
+script/**/*.json
 
 !.eslintrc.js
 !.prettierrc.js
