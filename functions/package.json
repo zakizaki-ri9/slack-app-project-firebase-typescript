@@ -3,10 +3,10 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "deploy": "yarn build && firebase deploy --only functions",
-    "serve": "yarn build && firebase serve --only functions",
-    "shell": "yarn build && firebase functions:shell",
-    "start": "yarn shell",
+    "deploy": "npm run build && firebase deploy --only functions",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
     "logs": "firebase functions:log",
     "lint-fix": "eslint --ext .ts,.js --fix src/**"
   },
