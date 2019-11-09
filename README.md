@@ -2,6 +2,22 @@ TypeScript x CloudFunctionsによるSlackApp
 
 # Firebase、Slack系のメモ
 
+## 動作手順
+
+```bash
+cd ./functions
+
+# envファイルの設定
+cp base.env .env
+vi .env
+
+# インストール
+npm install
+
+# CloudFunctionsローカル起動
+npm run start
+```
+
 ## CloundFunctionsをTypeScriptで書く
 
 ### `tsc --watch`
@@ -37,9 +53,21 @@ TypeScript x CloudFunctionsによるSlackApp
 
 やっていることは、コンパイル→firebase cliを使ってローカル上で動作させている。
 
-## 参考文献
+### 参考文献
 
 - [Qiita - Cloud Functions を TypeScript で書く](https://qiita.com/star__hoshi/items/7dcf5970d28a7ff239fb)
+
+## Slack系
+
+### Bolt
+
+- [Bolt入門ガイド](https://slack.dev/bolt/ja-jp/tutorial/getting-started)
+
+Boltはリスニングを前提に作られたSlackApp作成のためのフレームワーク（という解釈）。  
+[node-slack-sdk](https://github.com/slackapi/node-slack-sdk)も包括されているっぽいので、  
+今後、基本的にはBoltを入れておけば良さそう。
+
+> WebAPI・EventAPIだけ使いたい場合は、それぞれ導入してもOK。
 
 # その他
 

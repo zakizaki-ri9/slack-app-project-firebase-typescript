@@ -10,7 +10,7 @@ export const channelNamesPost = functions.https.onRequest(async (_, res) => {
   const channels = await conversations.list()
 
   if (channels) {
-    const client = new WebClient(process.env.SLACK_BOT_TOKEN)
+    const client = new WebClient(process.env.SLACK_OAUTH_TOKEN)
     await client.chat.postMessage({
       channel: 'general',
       text: channels
@@ -25,17 +25,19 @@ export const channelNamesPost = functions.https.onRequest(async (_, res) => {
   res.status(200).end()
 })
 
-export const boltChannelNamesPost = functions.https.onRequest(
+export const channelNamesPostByBolt = functions.https.onRequest(
   async (_, res) => {
-    const channels = await conversations.list()
+    const app = new App({
+      token: process.env.SLACK_BOT_TOKEN,
+      signingSecret: process.env.SLACK_SIGNING_SECRET
+    })
+    const result: conversations.ConversationsListResult = await app.client.conversations.list(
+      { token: process.env.SLACK_OAUTH_TOKEN }
+    )
+    const channels = result.channels || []
     if (channels) {
-      const app = new App({
-        token: process.env.SLACK_BOT_TOKEN,
-        signingSecret: process.env.SLACK_SIGNING_SECRET
-      })
-
       await app.client.chat.postMessage({
-        token: process.env.SLACK_BOT_TOKEN,
+        token: process.env.SLACK_OAUTH_TOKEN,
         channel: 'general',
         text: channels
           .map(v => {
@@ -43,8 +45,7 @@ export const boltChannelNamesPost = functions.https.onRequest(
           })
           .join('\n')
       })
-
-      res.status(200).end()
     }
+    res.status(200).end()
   }
 )
