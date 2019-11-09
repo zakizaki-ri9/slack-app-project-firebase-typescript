@@ -14,7 +14,7 @@ interface Channel {
 }
 
 export async function list(): Promise<Channel[]> {
-  const client = new WebClient(process.env.SLACK_TOKEN)
+  const client = new WebClient(process.env.SLACK_BOT_TOKEN)
   const result: ConversationsListResult = await client.conversations.list()
   return result.channels || []
 }
